@@ -23,8 +23,8 @@ export class AppComponent {
   parseProteinNodes(proteinNodes){
     let nodes: Node[] = [];
 
-    for(let i = 1; i<=proteinNodes.length; i++){
-      let curr = proteinNodes[i];    
+    for(let i = 0; i<proteinNodes.length; i++){
+      let curr = proteinNodes[i];
       this.pid_to_nodePos[curr.id] = i;    // Map proteinID to position of its node
 
       nodes.push(new Node(curr.id, curr.label));
@@ -40,15 +40,14 @@ export class AppComponent {
   */
   parseProteinEdges(proteinEdges){
     let links: Link[] = [];
-    for(let i = 1; i<=proteinEdges.length; i++){
+    for(let i = 0; i<proteinEdges.length; i++){
       let curr = proteinEdges[i];
       let t = this.pid_to_nodePos[curr.target];
       let s = this.pid_to_nodePos[curr.source];
 
       this.nodes[t].linkCount++;
       this.nodes[s].linkCount++;
-
-      links.push(new Link(t,s));
+      links.push(new Link(t+1,s+1));
     }
     return links;
   }
